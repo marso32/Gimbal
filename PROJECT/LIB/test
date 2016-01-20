@@ -1,0 +1,9 @@
+#!/usr/bin/python
+
+import sys
+import time
+
+
+
+print "Allo"
+time.sleep(2)

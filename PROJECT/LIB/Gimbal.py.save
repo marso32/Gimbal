@@ -1,0 +1,26 @@
+#!/usr/bin/python
+
+import sys
+import smbus
+import math
+import MPU6050 as accel
+
+class accelerometre:
+	def init(ax,ay,az,gx,gy,gz,pitch,roll):
+		ax=0
+		ay=0
+		az=0
+		gx=0
+		gy=0
+		gz=0
+		pitch=1
+		roll=1
+
+DELTA_T = 0.05
+
+acc=accelerometre()
+print acc.ax
+accel.initIMU(0x68)
+accel.updateIMU(acc)
+print acc.ax
+
