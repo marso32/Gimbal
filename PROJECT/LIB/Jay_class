@@ -1,0 +1,50 @@
+class servo():
+	def __init__(self,channel,direction,position,old_position):
+		self.direction = direction
+		self.position = position
+		self.old_position= position
+
+class pid():
+
+	"""
+	Calculate the pid value with a given error (IT DOESN'T CALCULATE THE ERROR!)
+	"""
+	def __init__(self, P, I, D, Derivator, Integrator, Integrator_max, Integrator_min):
+
+		self.Kp=P
+		self.Ki=I
+		self.Kd=D
+		self.Derivator=0
+		self.Integrator=0
+		self.Integrator_max=500
+		self.Integrator_min=-500
+		self.error=0
+
+	def update(self):
+		"""
+		Calculate PID output value for given reference input and feedback
+		"""
+
+		self.P_value = self.Kp * self.error
+		self.D_value = self.Kd * ( self.error - self.Derivator)
+		self.Derivator = self.error
+
+		self.Integrator = self.Integrator + self.error
+
+		if self.Integrator > self.Integrator_max:
+			self.Integrator = self.Integrator_max
+		elif self.Integrator < self.Integrator_min:
+			self.Integrator = self.Integrator_min
+
+		self.I_value = self.Integrator * self.Ki
+
+		PID = self.P_value + self.I_value + self.D_value
+
+		return PID
+
+	def finderror(self,current_angle,set_angle):
+		"""
+		Will work with an angle error 
+		"""
+		self.error = current_angle - set_point 
+
