@@ -18,23 +18,6 @@ def findvalue(pulse,freq):
         	return pulse
 
 
-class servo:
 
-	def __init__(self,adr,freq,channel,POS_MIDDLE):
-	
-		#Frequency in hertz
-		#Adress found with I2cdetect
-
-		pwm = PWM(adr)
-		pwm.setPWMFreq(freq)
-		self.channel = channel
-		self.pos = POS_MIDDLE
-
-	def update(pwm,servo,valeur):
-	
-		#The value is between 500 and 750
-		#Servo is an object with .num .npos(newposition)
-		#pwm is the chip (straight the output of Init_servo_driver
-		pwm.setPWM(servo.channel, 0, servo.npos)
 
 
