@@ -9,7 +9,7 @@ class pid():
 	"""
 	Calculate the pid value with a given error (IT DOESN'T CALCULATE THE ERROR!)
 	"""
-	def __init__(self, P, I, D, Derivator, Integrator, Integrator_max, Integrator_min):
+	def __init__(self, P, I, D):
 
 		self.Kp=P
 		self.Ki=I
