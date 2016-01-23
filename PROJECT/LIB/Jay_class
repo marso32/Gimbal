@@ -1,3 +1,9 @@
+#!/usr/bin/python
+import sys
+sys.path.append('AdafruitCode/Adafruit_PWM_Servo_Driver')
+from Adafruit_PWM_Servo_Driver import PWM
+import time
+
 class servo():
 	def __init__(self,channel,direction,position,old_position):
 		self.direction = direction
