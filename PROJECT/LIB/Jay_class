@@ -11,7 +11,7 @@ import os.pat
 
 pwm = Pwm.PWM(0x41)
 Pwm.setPWMFreq(100)
-class servo():
+class Servo():
 	def __init__(self,channel,direction,position,old_position):
 		if direction == 0 :
 			direction = 1
@@ -23,12 +23,12 @@ class servo():
 		
 	def move_pid(self,pid)
 		
-		self.old_position = s.position
-		s.position = s.position + (pid.update()*self.direction)
+		self.old_position = self.position
+		self.position = self.position + (pid.update()*self.direction)
 		pwm.setPWM(self.channel,0,self.position)
 		
 
-class pid():
+class Pid():
 
 	"""
 	Calculate the pid value with a given error (IT DOESN'T CALCULATE THE ERROR!)
@@ -72,7 +72,7 @@ class pid():
 		"""
 		self.error = current_angle - set_point 
 		
-class imu()
+class Imu()
 	__init__();
 	
 		k=0
