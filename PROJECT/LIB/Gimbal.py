@@ -7,7 +7,7 @@ import Acc
 
 
 
-from Jay_class import servo,pid,imu
+from Jay_class import Servo,Pid,Imu
 import time
 
 
@@ -20,17 +20,17 @@ I = 0
 D = 0
 SET_ANGLE_ROLL = 0
 SET_ANGLE_PITCH = 0
-acc=imu()
-sroll=servo(0,1,MIDDLE_POS,MIDDLE_POS)
-spitch=servo(1,1,MIDDLE_POS,MIDDLE_POS)
-pidroll = pid(P,I,D)
-pidpitch = pid(P,I,D)
+acc=Imu()
+sroll=Servo(0,1,MIDDLE_POS,MIDDLE_POS)
+spitch=Servo(1,1,MIDDLE_POS,MIDDLE_POS)
+pidroll = Pid(P,I,D)
+pidpitch = Pid(P,I,D)
 
 
 while 1:
 	t=time.time()
 	
-	imu.ReadIMU(acc,5)
+	Imu.ReadIMU(acc,5)
 	
 	pidroll.finderror(acc.roll,SET_ANGLE_ROLL)
 	pidpitch.finderror(acc.pitch,SET_ANGLE_PITCH)
