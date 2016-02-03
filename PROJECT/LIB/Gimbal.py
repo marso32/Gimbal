@@ -3,9 +3,6 @@
 import sys
 import smbus
 import math
-import Acc
-
-
 
 from Jay_class import Servo,Pid,Imu
 import time
@@ -13,38 +10,36 @@ import time
 
 
 
-DELTA_T = 0.05
+DELTA_T = 0.005
 MIDDLE_POS = 550
-P = 0
-I = 0
+P = 1.5
+I = 0.02
 D = 0
 SET_ANGLE_ROLL = 0
 SET_ANGLE_PITCH = 0
 acc=Imu()
-sroll=Servo(0,1,MIDDLE_POS,MIDDLE_POS)
+sroll=Servo(0,-1,MIDDLE_POS,MIDDLE_POS)
 spitch=Servo(1,1,MIDDLE_POS,MIDDLE_POS)
 pidroll = Pid(P,I,D)
 pidpitch = Pid(P,I,D)
 
+t = time.time()
 
 while 1:
-	t=time.time()
 	
-	Imu.ReadIMU(acc,5)
 	
-	pidroll.finderror(acc.roll,SET_ANGLE_ROLL)
-	pidpitch.finderror(acc.pitch,SET_ANGLE_PITCH)
+	acc.ReadIMU(1)
+	
 
-	sroll.move_pid(pidroll)
-	spitch.move_pid(pidpitch)
-	
-	delta_t = time.time()-t
-	if delta_t > 0 :
-		time.sleep(DELTA_T-delta_t)
-		print delta_t
-	else :
-		print "L'intervalle de temps est trop faible"
-	
-	
+	if time.time() - t > DELTA_T: 
+		pidroll.finderror(acc.roll,SET_ANGLE_ROLL)
+		pidpitch.finderror(acc.pitch,SET_ANGLE_PITCH)
+
+		sroll.move_pid(pidroll)
+		spitch.move_pid(pidpitch)
+		t= time.time()
+	  
+		print "Roll angle",acc.roll	
+
 	
 
