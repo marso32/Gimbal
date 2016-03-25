@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "On demarre le programme Attention a vos doigts !"
+sudo python VitesseGimbal.py
+if read = " .*";then
+	kill 
